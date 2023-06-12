@@ -13,6 +13,11 @@ export default {
             name: 'entry',
             component: () =>
                 import ('@/modules/daybook/views/EntryView'),
+            props: (route) => {
+                return {
+                    id: route.params.id
+                }
+            }
         }
     ]
 

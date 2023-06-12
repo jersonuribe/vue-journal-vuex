@@ -4,13 +4,15 @@
             <input 
                 type="text"
                 class="form-control"
-                placeholder="Buscar entradas">
+                placeholder="Buscar entradas"
+                v-model="term">
         </div>
 
         <div class="entry-scrollarea">
             <Entry
-                v-for="item in 100"
-                :key="item"
+                v-for="entry in entryByTerm"
+                :key="entry.id"
+                :entry="entry"
             />
         </div>
     </div>
@@ -18,9 +20,21 @@
 
 <script>
 import { defineAsyncComponent } from 'vue'
+import { mapGetters } from 'vuex';
 export default {
     components: {
         Entry: defineAsyncComponent(() => import('./Entry.vue'))
+    },
+    computed: {
+        ...mapGetters('journal',['getEntriesByTerm']),
+        entryByTerm() {
+            return this.getEntriesByTerm(this.term)
+        }
+    },
+    data(){
+        return {
+            term: ''
+        }
     }
 }
 </script>
@@ -36,3 +50,4 @@ export default {
         overflow: scroll;
     }        
 </style>
+
