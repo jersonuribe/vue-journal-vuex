@@ -1,4 +1,4 @@
-# 05-rutas-ciclo
+# Journal
 
 ## Project setup
 ```
